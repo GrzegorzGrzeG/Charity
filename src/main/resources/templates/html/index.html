@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" >
+<html xmlns:th="http://www.thymeleaf.org"  lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -85,9 +85,11 @@
       <div class="about-us--text">
         <h2>O nas</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero optio esse quisquam illo omnis.</p>
-        <img src="images/signature.svg" class="about-us--text-signature" alt="Signature" />
+        <img src="/images/signature.svg" class="about-us--text-signature" alt="Signature" />
       </div>
-      <div class="about-us--image"><img th:src="@{/images/about-us.jpg}" alt="People in circle" /></div>
+      <div class="about-us--image">
+        <img th:src="@{/images/about-us.jpg}" alt="People in circle" />
+      </div>
     </section>
 
     <section id="help" class="help">
@@ -152,6 +154,6 @@
       </div>
     </footer>
 
-    <script th:src="js/app.js"></script>
+    <script th:src="@{/js/app.js}"></script>
   </body>
 </html>
