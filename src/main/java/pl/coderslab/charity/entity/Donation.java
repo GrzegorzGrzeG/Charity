@@ -19,12 +19,13 @@ public class Donation {
     private Long id;
     private Integer quantity;
 
-    @OneToMany
+    @ManyToMany
     private List<Category> categories;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "institution_id")
     private Institution institution;
+
     private String street;
     private String city;
     private String zipCode;
