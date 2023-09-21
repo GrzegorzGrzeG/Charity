@@ -12,4 +12,14 @@ public class DonationService {
     public DonationService(DonationRepository donationRepository) {
         this.donationRepository = donationRepository;
     }
+
+    public Integer sum() {
+        return donationRepository.sum();
+    }
+
+    public long count() {
+        return donationRepository.count();
+    }
+
+
 }
