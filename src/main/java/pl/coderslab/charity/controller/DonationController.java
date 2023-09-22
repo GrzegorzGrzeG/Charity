@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.Donation;
+import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.service.CategoryService;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.InstitutionService;
@@ -35,10 +37,17 @@ public class DonationController {
     }
 
     @PostMapping("/form")
-    public String postForm(@RequestParam(name = "categories") List<Long> categories,
-                           @RequestParam(name = "bags") Integer bags,
+    public String postForm(@RequestParam("categories") List<Long> categories,
+                           @RequestParam("bags") Integer bags,
+                           @RequestParam("institutionId")Long institutionId,
                            Donation donation) {
+        List<Category> categoryList = categoryService.findByIds(categories);
+        Institution institution = institutionService.findById(institutionId).orElseThrow();
+        donation.setCategories(categoryList);
+        donation.setQuantity(bags);
+        donation.setInstitution(institution);
+        donationService.save(donation);
 
-        return "";
+        return "/html/index";
     }
 }

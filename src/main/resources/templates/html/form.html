@@ -81,7 +81,7 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form action="/form" method="post">
+        <form th:action="@{/form}" method="post" th:object="${donation}">
           <!-- STEP 1: class .active is switching steps -->
           <div data-step="1" class="active">
             <h3>Zaznacz co chcesz oddać:</h3>
@@ -126,7 +126,7 @@
 
             <div class="form-group form-group--checkbox">
               <label th:each="institutionList : ${institutionList}">
-                <input type="radio" name="organization" value="old" />
+                <input type="radio" name="institutionId" value="old" th:value="${institutionList.id}"/>
                 <span class="checkbox radio"></span>
                 <span class="description">
                   <div class="title"><p th:text="${institutionList.name}"></p></div>
@@ -145,11 +145,11 @@
           </div>
 
           <!-- STEP 5 -->
-          <form th:action="${/form}" method="post" th:object="${donation}">
+
           <div data-step="4">
             <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
-
             <div class="form-section form-section--columns">
+<!--              <form th:action="@{/form}" method="post" th:object="${donation}">-->
               <div class="form-section--column">
                 <h4>Adres odbioru</h4>
                 <div class="form-group form-group--inline">
@@ -190,13 +190,13 @@
                   </label>
                 </div>
               </div>
+<!--              </form>-->
             </div>
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>
               <button type="button" class="btn next-step">Dalej</button>
             </div>
           </div>
-          </form>
           <!-- STEP 6 -->
           <div data-step="5">
             <h3>Podsumowanie Twojej darowizny</h3>
