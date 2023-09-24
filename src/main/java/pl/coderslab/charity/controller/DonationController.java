@@ -1,6 +1,5 @@
 package pl.coderslab.charity.controller;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,15 +38,16 @@ public class DonationController {
     @PostMapping("/form")
     public String postForm(@RequestParam("categories") List<Long> categories,
                            @RequestParam("bags") Integer bags,
-                           @RequestParam("institutionId")Long institutionId,
-                           Donation donation) {
+                           @RequestParam("institutionId") Long institutionId,
+                           Donation donation,
+                           Model model) {
         List<Category> categoryList = categoryService.findByIds(categories);
         Institution institution = institutionService.findById(institutionId).orElseThrow();
         donation.setCategories(categoryList);
         donation.setQuantity(bags);
         donation.setInstitution(institution);
         donationService.save(donation);
-
-        return "/html/index";
+        model.addAttribute("result", donation);
+        return "/html/form-confirmation";
     }
 }
