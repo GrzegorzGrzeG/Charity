@@ -5,9 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.entity.UserRole;
 import pl.coderslab.charity.service.UserService;
+
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -32,6 +35,17 @@ public class UserController {
         user.setUserRole(UserRole.USER);
         userService.save(user);
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model){
+        return "/html/login";
+    }
+
+    @GetMapping("/info")
+    @ResponseBody
+    public String info(Principal principal) {
+        return principal.toString();
     }
 
 
