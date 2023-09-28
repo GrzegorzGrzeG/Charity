@@ -14,6 +14,6 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
     @Query("SELECT COUNT(d.quantity) FROM Donation d")
     long count();
 
-    @Query("SELECT d FROM Donation d WHERE d.user = :id")
-   List<Donation> getDonationsByUser(@Param("id")Long id);
+    @Query(value = "SELECT d FROM Donation d WHERE d.user = :id")
+    List<Donation> getDonationsByUserId(@Param("id") Long id);
 }

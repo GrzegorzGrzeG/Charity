@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>Quantity</td>
+        <td>Categories</td>
+        <td>Institution</td>
+        <td>Street</td>
+        <td>City</td>
+        <td>ZipCode</td>
+        <td>PickUpDate</td>
+        <td>PickUpTime</td>
+        <td>PickUpComment</td>
+        <td>Phone</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="donations : ${donations}">
+        <td th:text="${donations.quantity}"></td>
+        <td th:text="${donations.categories}"></td>
+        <td th:text="${donations.institution}"></td>
+        <td th:text="${donations.street}"></td>
+        <td th:text="${donations.city}"></td>
+        <td th:text="${donations.zipCode}"></td>
+        <td th:text="${donations.pickUpDate}"></td>
+        <td th:text="${donations.pickUpTime}"></td>
+        <td th:text="${donations.pickUpComment}"></td>
+        <td th:text="${donations.phone}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
