@@ -23,6 +23,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @OneToMany
-    private List<Donation> donations;
 }

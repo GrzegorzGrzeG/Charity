@@ -35,4 +35,9 @@ public class Donation {
     private LocalTime pickUpTime;
     private String pickUpComment;
     private String phone;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

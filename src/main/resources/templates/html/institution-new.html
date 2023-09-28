@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New</title>
+</head>
+<body>
+<form th:action="@{/admin/new}" method="post" th:object="${institution}">
+    <label>Nazwa</label>
+    <input type="text" th:field="*{name}">
+    <label>Opis</label>
+    <input type="text" th:field="*{description}">
+    <button type="submit">Dodaj</button>
+</form>
+
+</body>
+</html>

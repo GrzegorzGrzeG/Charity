@@ -1,4 +1,4 @@
-package pl.coderslab.charity.config;
+package pl.coderslab.charity.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CustomUserDetails implements UserDetails {
-    private final User user;
+    private User user;
 
     public CustomUserDetails(User user) {
         this.user = user;

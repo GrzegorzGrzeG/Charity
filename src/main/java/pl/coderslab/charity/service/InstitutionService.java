@@ -16,6 +16,9 @@ public class InstitutionService {
     public InstitutionService(InstitutionRepository institutionRepository) {
         this.institutionRepository = institutionRepository;
     }
+    public void save(Institution institution){
+        institutionRepository.save(institution);
+    }
 
     public List<Institution> listAll() {
         return institutionRepository.findAll();
@@ -23,5 +26,9 @@ public class InstitutionService {
 
     public Optional<Institution> findById(Long id) {
         return institutionRepository.findById(id);
+    }
+
+    public void deleteById(Long id) {
+        institutionRepository.deleteById(id);
     }
 }

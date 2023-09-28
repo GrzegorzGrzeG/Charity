@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     @Autowired
@@ -16,5 +18,13 @@ public class UserService {
 
     public void save(User user){
         userRepository.save(user);
+    }
+
+    public User findByEmail(String email){
+        return userRepository.findUserByEmail(email);
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 }

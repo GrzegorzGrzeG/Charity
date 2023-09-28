@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <form th:action="@{/admin/institution/{id}}" method="post">
+    <tr th:each="institution : ${institution}">
+        <td><input type="text" th:value="${institution.name}" name="name"></td>
+        <td><input type="text" th:value="${institution.description}" name="description"></td>
+        <td><button type="submit" name="id" th:value="${institution.id}">Potwierdź</button></td>
+    </tr>
+    </form>
+    </tbody>
+</table>
+
+</body>
+</html>

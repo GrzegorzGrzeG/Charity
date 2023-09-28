@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
+import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.service.CategoryService;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.InstitutionService;
+import pl.coderslab.charity.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -19,11 +22,13 @@ public class DonationController {
     private final DonationService donationService;
     private final CategoryService categoryService;
     private final InstitutionService institutionService;
+    private final UserService userService;
 
-    public DonationController(DonationService donationService, CategoryService categoryService, InstitutionService institutionService) {
+    public DonationController(DonationService donationService, CategoryService categoryService, InstitutionService institutionService, UserService userService) {
         this.donationService = donationService;
         this.categoryService = categoryService;
         this.institutionService = institutionService;
+        this.userService = userService;
     }
 
     @RequestMapping("/form")
@@ -40,12 +45,15 @@ public class DonationController {
                            @RequestParam("bags") Integer bags,
                            @RequestParam("institutionId") Long institutionId,
                            Donation donation,
-                           Model model) {
+                           Model model,
+                           Principal principal) {
         List<Category> categoryList = categoryService.findByIds(categories);
         Institution institution = institutionService.findById(institutionId).orElseThrow();
+        User user = userService.findByEmail(principal.getName());
         donation.setCategories(categoryList);
         donation.setQuantity(bags);
         donation.setInstitution(institution);
+        donation.setUser(user);
         donationService.save(donation);
         model.addAttribute("result", donation);
         return "/html/form-confirmation";
