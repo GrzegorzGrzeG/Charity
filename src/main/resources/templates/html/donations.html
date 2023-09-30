@@ -19,6 +19,7 @@
         <td>PickUpComment</td>
         <td>Phone</td>
         <td>Recived</td>
+        <td>Collect</td>
     </tr>
     </thead>
     <tbody>
@@ -34,9 +35,13 @@
         <td th:text="${donations.pickUpComment}"></td>
         <td th:text="${donations.phone}"></td>
         <td th:text="${donations.isRecived}"></td>
+        <td>
+            <form th:action="@{/admin/donations}" method="post">
+                <button type="submit" name="id" th:value="${donations.id}">Select</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>

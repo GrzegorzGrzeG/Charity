@@ -42,4 +42,6 @@ public class Donation {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    boolean isRecived;
 }

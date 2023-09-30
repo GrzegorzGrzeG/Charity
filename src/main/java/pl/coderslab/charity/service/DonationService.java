@@ -7,6 +7,7 @@ import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DonationService {
@@ -31,6 +32,14 @@ public class DonationService {
 
     public List<Donation> findAllByUser(User user) {
         return donationRepository.getDonationsByUser(user);
+    }
+
+    public List<Donation> findAll() {
+        return donationRepository.findAll();
+    }
+
+    public Optional<Donation> findById(Long id) {
+        return donationRepository.findById(id);
     }
 
 

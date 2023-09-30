@@ -12,6 +12,7 @@
         <td>Lastname</td>
         <td>Email</td>
         <td>Role</td>
+        <td>Give Admin</td>
     </tr>
     </thead>
     <tbody>
@@ -20,6 +21,11 @@
         <td th:text="${users.lastName}"></td>
         <td th:text="${users.email}"></td>
         <td th:text="${users.userRole}"></td>
+        <td>
+            <form th:action="@{/admin/users}" method="post">
+                <button type="submit" name="admin" th:value="${users.id}">Select</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

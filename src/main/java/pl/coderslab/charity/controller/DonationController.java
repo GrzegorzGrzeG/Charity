@@ -54,6 +54,7 @@ public class DonationController {
         donation.setQuantity(bags);
         donation.setInstitution(institution);
         donation.setUser(user);
+        donation.setRecived(false);
         donationService.save(donation);
         model.addAttribute("result", donation);
         return "/html/form-confirmation";

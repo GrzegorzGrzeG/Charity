@@ -3,8 +3,11 @@ package pl.coderslab.charity.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.User;
+import pl.coderslab.charity.entity.UserRole;
+import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.InstitutionService;
 import pl.coderslab.charity.service.UserService;
 
@@ -15,10 +18,12 @@ import java.util.List;
 public class AdminController {
     private final InstitutionService institutionService;
     private final UserService userService;
+    private final DonationService donationService;
 
-    public AdminController(InstitutionService institutionService, UserService userService) {
+    public AdminController(InstitutionService institutionService, UserService userService, DonationService donationService) {
         this.institutionService = institutionService;
         this.userService = userService;
+        this.donationService = donationService;
     }
 
     @RequestMapping("")
@@ -61,8 +66,8 @@ public class AdminController {
 
     @PostMapping("/institution/{id}")
     public String institutionDetailsProcess(@RequestParam("name") String name,
-                                            @RequestParam("description")String description,
-                                            @RequestParam("id")Long id) {
+                                            @RequestParam("description") String description,
+                                            @RequestParam("id") Long id) {
         Institution institution = institutionService.findById(id).orElseThrow();
         institution.setName(name);
         institution.setDescription(description);
@@ -71,9 +76,33 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String users(Model model){
+    public String users(Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "/html/user-list";
+    }
+
+    @PostMapping("/users")
+    public String userToAdmin(@RequestParam("admin") Long id) {
+        User user = userService.findById(id).orElseThrow();
+        user.setUserRole(UserRole.ADMIN);
+        userService.save(user);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/donations")
+    public String donationsList(Model model){
+        List<Donation> donations = donationService.findAll();
+        model.addAttribute("donations", donations);
+
+        return "/html/donations";
+    }
+
+    @PostMapping("/donations")
+    public String donationsRecive(@RequestParam("id")Long id) {
+        Donation donation = donationService.findById(id).orElseThrow();
+        donation.setRecived(true);
+        donationService.save(donation);
+        return "redirect:/admin/donations";
     }
 }
