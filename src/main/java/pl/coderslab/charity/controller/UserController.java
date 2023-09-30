@@ -53,16 +53,14 @@ public class UserController {
     @GetMapping("/my")
     @ResponseBody
     public String info(Principal principal) {
-        return principal.toString();
+        return principal.getName();
     }
 
     @GetMapping("/donations")
-    @ResponseBody
     public String donations(Principal principal, Model model) {
         User user = userService.findByEmail(principal.getName());
-        List<Donation> donations = donationService.findAllByUserId(user.getId());
+        List<Donation> donations = donationService.findAllByUser(user);
         model.addAttribute("donations", donations);
         return "/html/user-donations";
     }
-
 }

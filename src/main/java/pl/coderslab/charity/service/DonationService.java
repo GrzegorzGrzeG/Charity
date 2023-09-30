@@ -3,6 +3,7 @@ package pl.coderslab.charity.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.Donation;
+import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.DonationRepository;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public class DonationService {
         donationRepository.save(donation);
     }
 
-    public List<Donation> findAllByUserId(Long id) {
-        return donationRepository.getDonationsByUserId(id);
+    public List<Donation> findAllByUser(User user) {
+        return donationRepository.getDonationsByUser(user);
     }
 
 
